@@ -40,6 +40,21 @@ public class GPVM {
 	 *  the array containing the int[] stack to hold data for the VM.
 	 */
 	private int[] stack;
+	/**
+         * ---Added---
+	 *  the array containing the String[] dspace to hold data for the VM during runtime.
+	 */
+	private String[] dspace;
+        /**
+         * ---Added---
+         *  used to contain the results of an arithmetical or logical operation
+         */
+        private int accumulator;
+        /**
+         * ---Added---
+         *  used to contain a String from the dspace or from input
+         */
+        private String stringHolder;
 	
 	/**
 	 * the current opcode being processed.
@@ -238,6 +253,48 @@ public class GPVM {
 	 */
 	public synchronized void setPC(){
 		 pc=programSpace[firstOperand]%programSpace.length;
+	}
+	/**
+         * ---Added---
+	 * Sets the Accumulator to the value passed
+	 */
+	public synchronized void setAcc(int acc){
+		 accumulator=acc;
+	}
+	/**
+         * ---Added---
+	 * Returns the value in the accumulator
+	 */
+	public synchronized int getAcc(){
+		 return accumulator;
+	}
+	/**
+         * ---Added---
+	 * Returns the value in the stringHolder
+	 */
+	public synchronized String getSH(){
+		 return stringHolder;
+	}
+	/**
+         * ---Added---
+	 * Sets the value to the stringHolder
+	 */
+	public synchronized void setSH(String sh){
+		 stringHolder=sh;
+	}
+	/**
+         * ---Added---
+	 * Returns the value in the dspace at the accumulator
+	 */
+	public synchronized String getDSpace(int add){
+		 return dspace[add];
+	}
+	/**
+         * ---Added---
+	 * Sets the dspace at the accumulator 
+	 */
+	public synchronized void setDSpace(int add, String val){
+		 dspace[add]=val;
 	}
 	/**
 	 * Sets the PC with the address popped from the stack, but first it modifies the data by performing 
