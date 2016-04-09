@@ -19,7 +19,6 @@ public class SIN extends AbstractOpCode{
          * Functor to execute the input.
          */
 	public void opCode(GPVM g) {
-                System.out.println("?> ");
-                g.setDSpace(g.getAcc(), System.console().readLine());
+                g.setDSpace(g.getAcc(), System.console().readLine("?> "));
 	}
 }
