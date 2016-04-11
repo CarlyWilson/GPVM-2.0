@@ -19,12 +19,7 @@ package jjp.gpvm;
 
 public class GPVM {
 
-	private AbstractOpCode[] instSet = new AbstractOpCode{
-		new ADD(), new AND(), new BOO(), new CLL(), new DIV(), new DPSH(), new DUP(), new F2I(), 
-		new F2S(), new HLT(),new I2F(), new I2S(), new J(), new JP(), new JZ(), new LD(), new LDF(), new LDS(),
-		new MOD(), new MUL(), new NEG(), new NOT(), new OR(), new POP(), new PSH(), new RET(), new S2F(), new S2I(),
-		new SGH(), new SIN(), new SOUT(), new ST(), new STF(), new STS(), new SUB(), new XOR()
-		};
+	private AbstractOpCode[] instSet = new AbstractOpCode [0];
 	/**
 	 * the programSpace counter.
 	 */
