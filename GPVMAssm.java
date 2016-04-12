@@ -78,8 +78,8 @@ public class GPVMAssm {
 		ArrayList<String> al = new ArrayList<String>();
 		String[] source = new String[1];
 		try{	
-			//in = new FileInputStream(file);
-			in = new FileInputStream("./test");
+			in = new FileInputStream(file);
+			//in = new FileInputStream("./test");
 		}
 		catch (IOException ioe){
 			System.out.println("ERROR:  reading the saved file.");    
@@ -197,7 +197,7 @@ public class GPVMAssm {
 		String[] tokens;
 		int lineNum=0;
 		for (String s : source){
-			System.out.println("Line number:"+lineNum+",  String:"+s);
+			//System.out.println("Line number:"+lineNum+",  String:"+s);
 			tokens = s.trim().split(":");
 			if (tokens == null)			{
 				System.out.println("ASSM PASS 1:  Blank lines are not permitted. Assembly aborted.");
@@ -208,7 +208,7 @@ public class GPVMAssm {
 				System.exit(0);
 			}
 			else if (tokens.length==1){
-				System.out.println("One token; tokens[0] = \""+tokens[0]+"\"");
+				//System.out.println("One token; tokens[0] = \""+tokens[0]+"\"");
 				this.invalidTokenCheck(tokens[0], lineNum, s);
 				labellessSource.add(tokens[0].trim());
 				//no pass one work, because labels are not permitted on blank lines.
@@ -239,7 +239,7 @@ public class GPVMAssm {
                 objAL = new ArrayList<Integer>();
 		
 		for(int x = 0; x<source.length; x++){
-			System.out.println("Processing line "+x+": "+"source: "+source[x]+".");
+			//System.out.println("Processing line "+x+": "+"source: "+source[x]+".");
                         String temps=source[x];
                         String tempArg=null;
                         
@@ -312,10 +312,11 @@ public class GPVMAssm {
                 
                 objArray = new int[objAL.size()];
                 //convert ArrayList to array
-                for(int x : objAL){
+                for(int x=0; x<objAL.size(); x++){
                     objArray[x]=objAL.get(x);
                 }
-		return objArray;
+                
+                return objArray;
 	}
 	
 }
