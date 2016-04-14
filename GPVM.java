@@ -19,7 +19,7 @@ package jjp.gpvm;
 
 public class GPVM {
 
-	private AbstractOpCode[] instSet = new AbstractOpCode [0];
+	private AbstractOpCode[] instSet = new AbstractOpCode[0];
 	/**
 	 * the programSpace counter.
 	 */
@@ -71,6 +71,11 @@ public class GPVM {
 	 * Checked to determine if the stack should be displayed after a run. Defaults to display.
 	 */
 	private boolean showStack = true;
+
+        /**
+	 * Checked to determine if the dspace should be displayed after a run. Defaults to display.
+	 */
+	private boolean showDSpace = true;
 	
 	boolean done = false;
 	
@@ -152,6 +157,32 @@ public class GPVM {
 		System.out.println();
 		System.out.println("})");
 	}
+	/**
+	 * allows or disallows the display of the dspace at the end of each run.
+	 * @param b true if the instruction set should be show, false if not.
+	 */
+	public void showDSpace(boolean b){
+		showDSpace = b;
+	}
+	/**
+	 * Debug utility to display the contact of the dspace.
+	 */
+	private void showDSpace(){
+		System.out.println("(DSAPCE, {");
+		int counter = 0;
+		for (String x : dspace){
+			if(counter<15){
+				System.out.print("("+x+")");
+			}
+			else{
+				counter = 0;
+				System.out.println("("+x+")");
+			}
+			counter++;
+		}
+		System.out.println();
+		System.out.println("})");
+	}
 
 	/**
 	 * <p>pushes the data parameter onto the programSpace stack.</p>
@@ -161,8 +192,8 @@ public class GPVM {
 	 */
 	public synchronized void push(int data){
 		sp--;
-	
-		if(sp<0){
+
+                if(sp<0){
 			sp=stack.length-1;
 		}
 		stack[sp]=data;
@@ -284,6 +315,13 @@ public class GPVM {
 	}
 	/**
          * ---Added---
+	 * Returns the value of the stack pointer
+	 */
+	public synchronized int getSP(){
+		 return sp;
+	}
+	/**
+         * ---Added---
 	 * Returns the value in the dspace at the accumulator
 	 */
 	public synchronized String getDSpace(int add){
@@ -304,18 +342,22 @@ public class GPVM {
 	public synchronized void popPC(){
 		pc=pop()%programSpace.length;
 	}
+        
 	/**
 	 * 
 	 * @param p int[] of executable object code
 	 * @param n stack size for programSpace.
+         * @param d size for dspace
 	 * @return The value on top of the stack.
 	 */
-	
-	public int calculate(int[] p, int[] n, long maxExecute){
+	public String calculate(int[] p, int[] n, String[] d, long maxExecute){
 		programSpace=p;
 		stack = n;
 		sp  = 0;
 		pc = 0;
+                dspace = d;
+                for(int i=0; i<dspace.length; i++) dspace[i]="0";
+                accumulator = 0;
 		
 		if(showInstructionSet){
 			showInstSet();
@@ -334,7 +376,7 @@ public class GPVM {
 			}
 			else{
 //				System.out.println("Unrecognized opcode: "+current);
-				return -1;
+				return -1+"";
 			}
 			
 		}
@@ -343,9 +385,11 @@ public class GPVM {
 		if(showStack){
 			showStack();
 		}
+		if(showDSpace){
+			showDSpace();
+		}
 		
-		return (stack[sp]);
-
+		return (stack[sp])+"";
 	}
 
 }

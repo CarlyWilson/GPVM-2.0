@@ -26,8 +26,9 @@ public class F2I extends AbstractOpCode{
          * Functor to execute the conversion of fixed point to int.
          */
 	public void opCode(GPVM g) {
-                int temp = Integer.parseInt(g.getDSpace(g.getAcc()+1));
-                String temp2 = g.getDSpace(g.getAcc());
-                g.setDSpace(g.getAcc(), temp2.substring(0, temp));
+                String temp = g.getDSpace(g.getAcc());
+                int temp2 = temp.length()-Integer.parseInt(g.getDSpace(g.getAcc()+1));
+                g.setDSpace(g.getAcc(), temp.substring(0, temp2));
+                g.setDSpace(g.getAcc()+1, 0+"");
 	}
 }

@@ -30,7 +30,7 @@ public class S2F extends AbstractOpCode{
                 for(int i=0; i<temp.length(); i++){
                     if(temp.charAt(i)=='.'){
                         g.setDSpace(g.getAcc(), temp.substring(0, i)+temp.substring(i+1));
-                        g.setDSpace(g.getAcc()+1, temp.length()-i+"");
+                        g.setDSpace(g.getAcc()+1, temp.length()-(i+1)+"");
                         break;
                     }
                 }

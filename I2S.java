@@ -11,15 +11,15 @@ package jjp.gpvm;
 public class I2S extends AbstractOpCode{
         /**
          * Converts an int from the dspace to a string and stores it 
-         * in the accumulator
+         * in the dspace
          */
         public I2S(){
-                super("i2s", "Converts int to string", 1);        
+                super("i2s", "Converts int to string", 0);        
         }
         /**
          * Functor to execute the conversion of int to string.
          */
 	public void opCode(GPVM g) {
-                g.setDSpace(g.getOperand(), g.getDSpace(g.getAcc())+"");
+                g.setDSpace(g.getAcc(), g.getDSpace(g.getAcc()));
 	}
 }

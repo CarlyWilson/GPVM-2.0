@@ -28,6 +28,6 @@ public class I2F extends AbstractOpCode{
 	public void opCode(GPVM g) {
                 String temp = g.getDSpace(g.getAcc());
                 g.setDSpace(g.getAcc(), temp);
-                g.setDSpace(g.getAcc()+1, temp.length()+"");
+                g.setDSpace(g.getAcc()+1, 0+"");
 	}
 }

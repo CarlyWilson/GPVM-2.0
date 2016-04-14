@@ -24,7 +24,8 @@ public class LDF extends AbstractOpCode{
          * Functor to execute the load fixed point.
          */
 	public void opCode(GPVM g) {
-                g.push(Integer.parseInt(g.getDSpace(g.getOperand()+1)));
-                g.push(Integer.parseInt(g.getDSpace(g.getOperand())));
+                //int operand = g.getOperand();
+                //g.push(Integer.parseInt(g.getDSpace(operand+1)));
+                //g.push(Integer.parseInt(g.getDSpace(operand)));
 	}
 }
