@@ -1,4 +1,4 @@
-package jjp.gpvm;
+package gpvm;
 
 /**
 * @author  LadyWarship
@@ -64,7 +64,7 @@ public class InputOutput {
 		GPVM gPVM = getGPVM();
 		GPVMAssm assm = new GPVMAssm(gPVM);
 		int[] obj = assm.assemble(fileName);
-		return gPVM.calculate(obj, new int[STACK_SIZE], MAX_CYCLES);
+		return Integer.parseInt(gPVM.calculate(obj, new int[STACK_SIZE], new String[0], MAX_CYCLES));
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class InputOutput {
 		GPVMAssm assm = new GPVMAssm(gPVM);
 		String delimiters = "(\\s|\\t)";
 		int[] obj = assm.assemble(s.split(delimiters));
-		return gPVM.calculate(obj, new int[STACK_SIZE], MAX_CYCLES);
+		return Integer.parseInt(gPVM.calculate(obj, new int[STACK_SIZE], new String[0], MAX_CYCLES));
 	}
 	
 	
