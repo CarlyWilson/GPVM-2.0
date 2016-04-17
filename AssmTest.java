@@ -1,12 +1,15 @@
-package jjp.gpvm;
+package gpvm;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**
- *
  * @author Brian
+ */
+
+/**
+ * UnitTest for the two pass assembler.
  */
 public class AssmTest {
     
@@ -29,13 +32,15 @@ public class AssmTest {
         
         String [] prg = GPVMAssm.read(fileName);
         GPVM gPVM = new GPVM();
-        
+                
         gPVM.addOpCode(new ADD());
+        gPVM.addOpCode(new ADDF());
         gPVM.addOpCode(new AND());
         gPVM.addOpCode(new BOO());
         gPVM.addOpCode(new CLL());
         gPVM.addOpCode(new CONCAT());
         gPVM.addOpCode(new DIV());
+        gPVM.addOpCode(new DIVF());
         gPVM.addOpCode(new DPSH());
         gPVM.addOpCode(new DUP());
         gPVM.addOpCode(new F2I());
@@ -46,12 +51,17 @@ public class AssmTest {
         gPVM.addOpCode(new J());
         gPVM.addOpCode(new JP());
         gPVM.addOpCode(new JZ());
-        gPVM.addOpCode(new LD ());
+        gPVM.addOpCode(new LD());
+        gPVM.addOpCode(new LDC());
         gPVM.addOpCode(new LDF());
+        gPVM.addOpCode(new LDI());
+        gPVM.addOpCode(new LDR());
         gPVM.addOpCode(new LDS());
         gPVM.addOpCode(new MOD());
         gPVM.addOpCode(new MUL());
+        gPVM.addOpCode(new MULF());
         gPVM.addOpCode(new NEG());
+        gPVM.addOpCode(new NEGF());
         gPVM.addOpCode(new NOT());
         gPVM.addOpCode(new OR ());
         gPVM.addOpCode(new POP());
@@ -64,15 +74,18 @@ public class AssmTest {
         gPVM.addOpCode(new SOUT());
         gPVM.addOpCode(new ST());
         gPVM.addOpCode(new STF());
+        gPVM.addOpCode(new STI());
+        gPVM.addOpCode(new STR());
         gPVM.addOpCode(new STS());
-        gPVM.addOpCode(new SUB());			
+        gPVM.addOpCode(new SUB());
+        gPVM.addOpCode(new SUBF());
         gPVM.addOpCode(new XOR());
         
         GPVMAssm assm = new GPVMAssm(gPVM);
         
         int []obj = assm.assemble(prg);
         
-        int act = gPVM.calculate(obj, new int[10], 100);
+        int act = Integer.parseInt(gPVM.calculate(obj, new int[10], new String[10], 100));
         
         System.out.print("Expected: "+exp+" Actual: "+act+" Result: ");
         if(exp==act){
@@ -103,10 +116,41 @@ public class AssmTest {
         
         String test06 = "psh\n 21\n neg\nhlt";
         runTest(test06, -21, "06");
-    
+        
+        String test07 = "psh\n22\npsh\n3\nmod\nhlt";
+        runTest(test07, 1, "07");
+        
+        String test08 = "dpsh\n10\n1\npop\nhlt";
+        runTest(test08, 10, "08");
+        
+        String test09 = "psh\n-14551\nsgn\nhlt";
+        runTest(test09, -1, "09");
+        
+        String test10 = "dpsh\n 1 \n 101 \n dpsh \n 2 \n 110 \n addf\nhlt";
+        runTest(test10, 121, "10");
+        
+        String test11 = "dpsh\n 1\n 20\ndpsh\n 1\n 80\ndivf\nhlt";
+        runTest(test11, 40, "11");
+        
         System.out.println("---------------------------------------------------");
         System.out.println("Tests Run: "+att+" Tests Passed: "+passed);
         System.out.println("---------------------------------------------------");
 
+        /*---------------------------------------------------------------------
+        Assembler Requirements Tests
+        * Un-comment the one that is not being tested.
+        *----------------------------------------------------------------------
+        */
+        
+        System.out.println("");
+        
+        String test12 = "thisisareallylonglabel:10 \n psh \n 1 \n hlt";
+        //runTest(test12, 0, "12");
+        
+        String test13 = "Thislabelis15ch:1 \n psh \n 1 \n hlt";
+        //runTest(test13, 1, "13");
+        
+        String test14 = "4:1 \n psh \n 1 \n hlt";
+        //runTest(test14, 0, "14");
     }
 }
