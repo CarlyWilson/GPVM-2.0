@@ -85,7 +85,7 @@ public class AssmTest {
         
         int []obj = assm.assemble(prg);
         
-        int act = Integer.parseInt(gPVM.calculate(obj, new int[10], new String[10], 100));
+        int act = Integer.parseInt(gPVM.calculate(obj, new int[10], new String[10], 100, "-1"));
         
         System.out.print("Expected: "+exp+" Actual: "+act+" Result: ");
         if(exp==act){
@@ -111,7 +111,7 @@ public class AssmTest {
         String test04 = "psh\nOne: 1\npsh\nTwo: 2\nadd\nhlt";
         runTest(test04, 3, "04");
         
-        String test05 = "psh\n10\npsh\n5\nmul\nhlt";
+        String test05 = "psh\n5\npsh\n10\nmul\nhlt";
         runTest(test05, 50, "05");
         
         String test06 = "psh\n 21\n neg\nhlt";
@@ -126,31 +126,34 @@ public class AssmTest {
         String test09 = "psh\n-14551\nsgn\nhlt";
         runTest(test09, -1, "09");
         
-        String test10 = "dpsh\n 1 \n 101 \n dpsh \n 2 \n 110 \n addf\nhlt";
-        runTest(test10, 121, "10");
+        String test10 = "dpsh\n ONE:1 \n ONE \n add\nhlt";
+        runTest(test10, 2, "10");
         
         String test11 = "dpsh\n 1\n 20\ndpsh\n 1\n 80\ndivf\nhlt";
         runTest(test11, 40, "11");
+        
+        String test12 = "dpsh \n 0 \n 0 \n add\n hlt";
+        runTest(test12, 0, "12");
+        
+        String test13 = "dpsh \n 100 \n -100 \n sub \n hlt";
+        runTest(test13, 200, "13");
+        
+        String test14 = "dpsh \n 1 \n -2147483646  \n sub \n hlt";
+        runTest(test14, 2147483647, "14");
+        
+        String test15 = "dpsh \n 0 \n -2147483648 \n add \n hlt";
+        runTest(test15, -2147483648, "15");
+        
+        String test16 = "dpsh \n 1 \n 1073741823 \n psh \n 2 \n mul \n add \n hlt";
+        runTest(test16, 2147483647, "16");
+        
+        String test17 = "dpsh \n 1 \n 1 \n dpsh \n 1 \n 1 \n dpsh \n 4 \n 5 \n dpsh \n 2 \n 9 \n"
+                + "dpsh \n 0 \n 9 \n dpsh \n 8 \n 7 \n hlt";
+        runTest(test17, 7, "17");
         
         System.out.println("---------------------------------------------------");
         System.out.println("Tests Run: "+att+" Tests Passed: "+passed);
         System.out.println("---------------------------------------------------");
 
-        /*---------------------------------------------------------------------
-        Assembler Requirements Tests
-        * Un-comment the one that is not being tested.
-        *----------------------------------------------------------------------
-        */
-        
-        System.out.println("");
-        
-        String test12 = "thisisareallylonglabel:10 \n psh \n 1 \n hlt";
-        //runTest(test12, 0, "12");
-        
-        String test13 = "Thislabelis15ch:1 \n psh \n 1 \n hlt";
-        //runTest(test13, 1, "13");
-        
-        String test14 = "4:1 \n psh \n 1 \n hlt";
-        //runTest(test14, 0, "14");
     }
 }
