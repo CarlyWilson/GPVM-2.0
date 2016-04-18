@@ -14,7 +14,7 @@ public class MUL extends AbstractOpCode {
             int a = g.pop();
             int b = g.pop();
             long prod = a*b;
-            if(prod/a!=b){
+            if(a!=0&&prod/a!=b){
                 System.out.println("Overflow During Calculation Process Aborted");
                 System.exit(0);
             }
