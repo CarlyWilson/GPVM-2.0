@@ -1,7 +1,4 @@
-package gpvm;
-
-import gpvm.AbstractOpCode;
-import gpvm.GPVM;
+package jjp.gpvm;
 
 /**
  * Opcode representing tempA pop the top two items from the stack, subtract the first from the second: = stack[sp]; tempB = stack[sp+1]; stack[sp++] = tempB-tempA;

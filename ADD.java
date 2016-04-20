@@ -1,7 +1,4 @@
-package gpvm;
-
-import gpvm.AbstractOpCode;
-import gpvm.GPVM;
+package jjp.gpvm;
 
 /**
  * A class to support an opcode representing: 
