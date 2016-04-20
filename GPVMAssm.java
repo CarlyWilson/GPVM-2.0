@@ -214,6 +214,12 @@ public class GPVMAssm {
 				//no pass one work, because labels are not permitted on blank lines.
 			}
 			else{	
+                                if(tokens[0].length()>15 ||
+                                        Character.isDigit(tokens[0].charAt(0))){
+                                    System.out.println("Invalid Label. Assembly aborted.");
+                                    System.exit(0);
+                                }
+                                
 				System.out.println("tokens[0] = \""+tokens[0]+"\", and tokens[1]=\""+tokens[1]+".");
 				this.invalidTokenCheck(tokens[0], lineNum, s);
 				symtab.add(new SymbolTableEntry(tokens[0].trim(), lineNum));
