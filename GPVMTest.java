@@ -16,6 +16,10 @@ public class GPVMTest {
 	 * Number of tests attempted
 	 */
 	static int numRan= 0;
+	/**
+	 * Number of tests the user has to confirm passed
+	 */
+	static int numUserChecked=0;
 	/*
 	 * Instantiates a GPVM for the tests
 	 */
@@ -46,6 +50,7 @@ public class GPVMTest {
 		}
                 else if(act.equals("User must check")){
                     System.out.println("User must check.");
+                    numUserChecked++;
                 }
 		else{
 			System.out.println("FAILED.");
@@ -1628,7 +1633,7 @@ public class GPVMTest {
 		runTest(test91, "-10", "41b", "Testing sin with input as -10", "0"); 
                 
 		System.out.println("++++++++++++++++++++++++++++++++++++");
-		System.out.println("Tests run: "+numRan+". Tests passed: "+numPassed+". ");
+		System.out.println("Tests run: "+numRan+". Tests passed: "+numPassed+". Tests user must check: "+numUserChecked+".");
 		System.out.println("++++++++++++++++++++++++++++++++++++");
 	}
 
