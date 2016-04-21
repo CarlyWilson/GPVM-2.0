@@ -267,7 +267,7 @@ public class GPVMAssm {
 				catch(NumberFormatException e){
 					temp = findSymbol(temps);
 					if (temp>=0){
-						objAL.add(symtab.get(temp).line);
+						objAL.add(Integer.parseInt(source[symtab.get(temp).line]));
 						System.out.println("bang");
 					}
 					else{
@@ -287,7 +287,7 @@ public class GPVMAssm {
                                     catch(NumberFormatException e){
                                         temp = findSymbol(arg);
                                         if (temp>=0){
-                                            objAL.add(symtab.get(temp).line);
+                                            objAL.add(Integer.parseInt(source[symtab.get(temp).line]));
                                             System.out.println("bang");
                                         }
                                         else{
@@ -304,7 +304,7 @@ public class GPVMAssm {
                                 catch(NumberFormatException e){
                                     temp = findSymbol(tempArg);
                                     if (temp>=0){
-                                        objAL.add(symtab.get(temp).line);
+                                        objAL.add(Integer.parseInt(source[symtab.get(temp).line]));
                                         System.out.println("bang");
                                     }
                                     else{
